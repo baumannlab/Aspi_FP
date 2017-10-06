@@ -1,0 +1,24 @@
+statistic,value
+N50,32220929.00000
+N90,8340160.00000
+max_scaffold,85027298.00000
+mean_scaffold,7324693.00448
+median_scaffold,296338.00000
+min_scaffold,10129.00000
+number of scaffolds,223.00000
+perc_A,27.04953
+perc_C,20.12319
+perc_G,20.12935
+perc_N,5.64733
+perc_T,27.05060
+perc_genome_covered_by_scaffolds_greater_than_100kb,99.83077
+perc_genome_covered_by_scaffolds_greater_than_10kb,100.00000
+perc_genome_covered_by_scaffolds_greater_than_1mb,98.84123
+scaffolds_greater_than_100Mb,0.00000
+scaffolds_greater_than_100kb,133.00000
+scaffolds_greater_than_10Mb,45.00000
+scaffolds_greater_than_10kb,223.00000
+scaffolds_greater_than_1Mb,90.00000
+total bases,1633406540.00000
+non_n_GC%,42.66179
+non_n_AT%,57.33821
