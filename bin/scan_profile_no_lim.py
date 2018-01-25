@@ -15,6 +15,8 @@ from __future__ import division
 import pandas as pd
 import multiprocessing as mp
 import numpy as np
+import sys
+
 
 def apply_df(df, func, *args):
     return df.apply(lambda x: func(x, *args), axis=1)
@@ -86,14 +88,23 @@ def write_window_df(het_prof_path, avg_cov, scaffold_sizes_path, cpus, window=10
 if __name__ == '__main__':
     scaffold_sizes_path = '/home/dut/projects/tigris/genome_annotation/fasta/scaffold_sizes.clean.tsv'
 
-    paths =['/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/Atig001.merged.dedup.realigned.prof.not_hom',
-            '/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/Atig003.merged.dedup.realigned.prof.not_hom',
-            '/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/Atig_122.merged.dedup.realigned.prof.not_hom',
-            '/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/A_tigris8450.merged.dedup.realigned.prof.not_hom']
+    # paths =['/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/Atig001.merged.dedup.realigned.prof.not_hom',
+    #         '/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/Atig003.merged.dedup.realigned.prof.not_hom',
+    #         '/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/Atig_122.merged.dedup.realigned.prof.not_hom',
+    #         '/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/pysam/A_tigris8450.merged.dedup.realigned.prof.not_hom']
+    #
+    # avg_covs = [16, 18, 19, 18]
+    # for path, avg_cov in zip(paths, avg_covs):
+    #     print(path)
+    #     write_window_df(path, avg_cov, scaffold_sizes_path, 8, 10000)
 
-    avg_covs = [16, 18,19,18]
-    for path, avg_cov in zip(paths, avg_covs):
-        print(path)
-        write_window_df(path, avg_cov, scaffold_sizes_path, 8, 10000)
+    if len(sys.argv) == 3:
+        print(sys.argv)
+        write_window_df(sys.argv[1], int(sys.argv[2]), scaffold_sizes_path, 8, 10000)
+    else:
+        print('usage: scan_profile_no_lim.py /path/to/prof avg_cov')
+
+
+
 
     

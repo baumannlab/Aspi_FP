@@ -1,0 +1,16 @@
+#!/bin/bash
+java -Xmx4g -Djava.io.tmpdir=/scratch/dut -jar /home/dut/bin/picard-tools-1.119//MarkDuplicates.jar I=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/merged_bams/Atig_4278.merged.bam O=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/Atig_4278.merged.dedup.bam M=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/Atig_4278.merged_metrics.txt &
+proc1=$!
+java -Xmx4g -Djava.io.tmpdir=/scratch/dut  -jar /home/dut/bin/picard-tools-1.119//MarkDuplicates.jar I=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/merged_bams/A.tig_12512.merged.bam O=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/A.tig_12512.merged.dedup.bam M=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/A.tig_12512.merged_metrics.txt &
+proc2=$!
+java -Xmx4g -Djava.io.tmpdir=/scratch/dut -jar /home/dut/bin/picard-tools-1.119//MarkDuplicates.jar I=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/merged_bams/A.tig_12513.merged.bam O=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/A.tig_12513.merged.dedup.bam M=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/A.tig_12513.merged_metrics.txt &
+proc3=$!
+wait "$proc1" "$proc2" "$proc3"
+java -Xmx4g -Djava.io.tmpdir=/scratch/dut -jar /home/dut/bin/picard-tools-1.119//MarkDuplicates.jar I=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/merged_bams/A.tig_9721.merged.bam O=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/A.tig_9721.merged.dedup.bam M=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/A.tig_9721.merged_metrics.txt &
+proc4=$!
+java -Xmx4g -Djava.io.tmpdir=/scratch/dut -jar /home/dut/bin/picard-tools-1.119//MarkDuplicates.jar I=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/merged_bams/Atig_6993.merged.bam O=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/Atig_6993.merged.dedup.bam M=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/Atig_6993.merged_metrics.txt &
+proc5=$!
+java -Xmx4g -Djava.io.tmpdir=/scratch/dut -jar /home/dut/bin/picard-tools-1.119//MarkDuplicates.jar I=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/merged_bams/Atig_9177.merged.bam O=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/Atig_9177.merged.dedup.bam M=/n/projects/dut/a_marmorata/parthenogen_heterozygosity/data/gatk_MOLNG-2139_MOLNG-2140/preprocessing/dedup_merged/Atig_9177.merged_metrics.txt &
+proc6=$!
+wait "$proc4" "$proc5" "$proc6"
+wait "$proc1" "$proc2" "$proc3" "$proc4" "$proc5" "$proc6"

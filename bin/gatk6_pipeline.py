@@ -115,8 +115,8 @@ def ret_bwa_align_sort_cmd(pairs, sample, outdir, cpus, fasta_ref_path):
     bwa_command = "bwa mem -M -R \"%s\" -t %s %s %s %s" % (
         read_group, cpus, fasta_ref_path, r_pair, f_pair)
     sam_to_sorted_bam = ('samtools view -Sb -@ %s - | '
-                         'samtools sort -o -@ %s - %s > %s') % (
-        cpus, cpus, lane_id, output_bam)
+                         'samtools sort - -@ %s -o %s') % (
+        cpus, cpus, output_bam)
 
     align_sort_cmd = "(%s | %s) &\n" % (bwa_command, sam_to_sorted_bam)
 
@@ -128,7 +128,7 @@ def ret_dedup_cmd(sample_input,  sample, outdir, picard_tools_path):
     dedup_basename = os.path.basename(sample_input).replace('.bam', '')
     dedup_metric = '%s/%s_metrics.txt' % (outdir, dedup_basename)
     dedup_output = '%s/%s.dedup.bam' % (outdir, dedup_basename)
-    dedup_command = "java -Xmx4g -jar %s I=%s O=%s M=%s &\n" % (
+    dedup_command = "java -Xmx4g -Djava.io.tmpdir=/scratch/dut -jar %s I=%s O=%s M=%s &\n" % (
         dedup, sample_input, dedup_output, dedup_metric)
 
     return dedup_command, dedup_output
@@ -632,13 +632,12 @@ def run(args):
     train = args.train
     
     fasta_path = args.fasta_path
-    cpus = 8
     picard_tools_path = args.picard_path
     gatk = args.gatk_execute
 
     print(args.hcgvcfs)
     
-    tigris_report = lims.Indexed_sample_reports(molng, samples)
+    tigris_report = lims.Indexed_sample_reports(molng, samples, new_sample_report=args.new_sample_report)
     tigris_report.select_flowcells(flowcells)
     lane_pairs = tigris_report.ret_nested_pair_by_lane()
     scripts = []
@@ -684,7 +683,7 @@ def run(args):
     deduped_sample_bams, s5 = parallel_cmd_loop(
         input_dict=deduped_sample_bams, nested=False, write=True,
         write_prefix='gatk_5_index', cmd_function=ret_index_cmd,
-        outdir='preprocessing/deduped_merged')
+        outdir='preprocessing/dedup_merged')
     scripts.append(s5)
     
     realigned_sample_bams, s6 = parallel_cmd_loop(
@@ -771,6 +770,9 @@ if __name__ == '__main__':
 
     parser.add_argument('-add_hcgvcf',action='append',nargs=2, dest='hcgvcfs',
                         help='additional gvcf files produced by HaplotypeCaller to be used in joint genotypeing(-add_hcgvcf sample_name path_to_file')
+
+    parser.add_argument('-new_sample_report', action='store_true', dest='new_sample_report',
+                        default=False, help='train for known indels and snps')
 
     args = parser.parse_args()
 

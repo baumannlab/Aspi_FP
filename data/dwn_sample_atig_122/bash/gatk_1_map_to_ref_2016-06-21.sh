@@ -1,0 +1,6 @@
+#!/bin/bash
+(bwa mem -M -R "@RG\tID:Atig_122_L21676_HJ2YHBCXX_2\tSM:Atig_122\tPL:illumina\tLB:L21676\tPU:2" -t 8 /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/reference/tigris_scaffolds_filt_10000.fa /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/preprocessing/down_sample/s_2_1_CTCAGA.0.33ds.fastq /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/preprocessing/down_sample/s_2_2_CTCAGA.0.33ds.fastq | samtools view -Sb -@ 8 - | samtools sort -o -@ 8 - Atig_122_L21676_HJ2YHBCXX_2 > /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/preprocessing/map_to_ref_output/Atig_122_L21676_HJ2YHBCXX_2.bam) &
+proc1=$!
+(bwa mem -M -R "@RG\tID:Atig_122_L21676_HJ2YHBCXX_1\tSM:Atig_122\tPL:illumina\tLB:L21676\tPU:1" -t 8 /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/reference/tigris_scaffolds_filt_10000.fa /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/preprocessing/down_sample/s_1_1_CTCAGA.0.33ds.fastq /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/preprocessing/down_sample/s_1_2_CTCAGA.0.33ds.fastq | samtools view -Sb -@ 8 - | samtools sort -o -@ 8 - Atig_122_L21676_HJ2YHBCXX_1 > /home/dut/projects/tigris/heterozygosity/dwn_sample_atig_122/preprocessing/map_to_ref_output/Atig_122_L21676_HJ2YHBCXX_1.bam) &
+proc2=$!
+wait "$proc1" "$proc2"
