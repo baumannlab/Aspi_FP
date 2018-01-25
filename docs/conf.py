@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# A. marmoratus Genome Project documentation build configuration file, created by
-# sphinx-quickstart on Fri Oct  6 15:46:56 2017.
+# A marmoratus Genome Project documentation build configuration file, created by
+# sphinx-quickstart on Fri Oct  6 16:28:39 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -20,8 +20,16 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import sphinx_rtd_theme
 
 
+html_theme = 'sphinx_rtd_theme'
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# html_theme_options = {
+#     'collapse_navigation': False,
+#     'display_version': False,
+#     'navigation_depth': 3,
+# }
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -31,7 +39,7 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.githubpages']
+extensions = ['sphinx.ext.githubpages', 'nbsphinx', 'IPython.sphinxext.ipython_console_highlighting']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -46,7 +54,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'A. marmoratus Genome Project'
+project = 'A marmoratus Genome Project'
 copyright = '2017, Duncan Tormey'
 author = 'Duncan Tormey'
 
@@ -69,7 +77,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -142,7 +150,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'AmarmoratusGenomeProject.tex', 'A. marmoratus Genome Project Documentation',
+    (master_doc, 'AmarmoratusGenomeProject.tex', 'A marmoratus Genome Project Documentation',
      'Duncan Tormey', 'manual'),
 ]
 
@@ -152,7 +160,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'amarmoratusgenomeproject', 'A. marmoratus Genome Project Documentation',
+    (master_doc, 'amarmoratusgenomeproject', 'A marmoratus Genome Project Documentation',
      [author], 1)
 ]
 
@@ -163,7 +171,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'AmarmoratusGenomeProject', 'A. marmoratus Genome Project Documentation',
+    (master_doc, 'AmarmoratusGenomeProject', 'A marmoratus Genome Project Documentation',
      author, 'AmarmoratusGenomeProject', 'One line description of project.',
      'Miscellaneous'),
 ]
